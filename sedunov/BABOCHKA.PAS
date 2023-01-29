@@ -1,0 +1,66 @@
+program besedysbatyushkoi;
+uses graph,crt;
+var gd,gm,f,dx,dy,x,y,c,g:integer;
+d:char;
+procedure babushka(x,y,c,c1:integer);
+var i:integer;
+begin
+f:=random(2)+1;
+setcolor (c);
+setfillstyle (1,c);
+fillellipse (x,y,30,30);
+fillellipse (x,y+80,30,50);
+line (x,y-30,x-30,y-60);
+line (x,y-30,x+30,y-60);
+setcolor (0);
+setfillstyle (1,0);
+fillellipse (x-10,y,5,5);
+fillellipse (x+10,y,5,5);
+line (x-10,y+10,x+10,y+10);
+if f=2 then
+begin
+setcolor (c1);
+setfillstyle (2,c1);
+fillellipse (x-35,y+50,15,35);
+fillellipse (x-35,y+100,10,10);
+fillellipse (x+35,y+50,15,35);
+fillellipse (x+35,y+100,10,10);
+end;
+if f=1 then begin
+setfillstyle (2,c1);
+setcolor (4);
+fillellipse (x-60,y+50,35,55);
+fillellipse (x-35,y-80,10,10);
+fillellipse (x+60,y+50,35,55);
+fillellipse (x+35,y-80,10,10);
+end;
+end;
+begin
+x:=random (400)+1;
+y:=random (400)+1;
+gd:=VGA;
+gm:=VGAHi;
+initgraph (gd,gm,'c:\tools\tp7\bgi');
+repeat
+for g:=1 to 5 do
+BEGIN
+babushka (x,y,5,10);
+c:=random (4)+1;
+case c of
+1: dx:=5;
+2: dy:=5;
+3: dx:=-5;
+4: dy:=-5;
+end;
+delay(32000);
+setcolor (0);
+setfillstyle (1,0);
+bar (0,0,640,640);
+x:=x+dx;
+y:=y+dy;
+end;
+d:=readkey;
+until d=#27;
+readln;
+closegraph;
+end.

@@ -1,0 +1,61 @@
+program lovushkadjokera;
+Uses graph,crt;
+type tBukv = record
+x,y,dy:integer;
+lit: char;
+end;
+Mass = array[1..20] of tBukv;
+var m:mass;
+num,gd,gm,max,t,i,g:integer;
+c:char;
+ begin
+gd:=VGA;
+GM:=VGAHi;
+InitGraph(gd, gm, 'c:\tools\tp7\bgi');
+num:=0;
+max:=20;
+t:=Random(5)+5;
+repeat
+for i:=1 to Num do
+    begin
+    setcolor (2);
+    setfillstyle(2,1);
+    arc(m[i].x, m[i].y, 0, 180, 30);
+    line (m[i].x-30,m[i].y,m[i].x+30,m[i].y);
+    floodfill(m[i].x-15,m[i].y-5,blue);
+    line (m[i].x-30,m[i].y,m[i].x,m[i].y+45);
+    line (m[i].x,m[i].y,m[i].x,m[i].y+45);
+    line (m[i].x+20,m[i].y,m[i].x,m[i].y+45);
+    fillellipse(m[i].x,m[i].y+60,15,15);
+    OuttextXY (m[i].x,m[i].y+60,m[i].lit);
+    end;
+if num<max
+   then begin
+        dec(t);
+        if t=0
+        then begin
+             t:=Random(5)+5; inc(Num);
+             m[num].x:=random(600)+20;
+             m[num].y:=50;
+             m[num].lit:=chr(random(26)+ord('a'));
+             end;
+        end;
+delay(32000);
+for i:=1 to num do
+m[i].y:=m[i].y+20;
+setcolor (blue);
+setfillstyle (1,blue);
+bar (0,0,640,640);
+    if keypressed
+    then c:=Readkey;
+           if c=m[i].lit
+           then begin m[Num]:=m[i];
+           num:=num-1;
+           end;
+           for i:=1 to num do
+           if m[i].x=439
+           then g:=g+1;
+until g=1;
+readln;
+Closegraph;
+end.

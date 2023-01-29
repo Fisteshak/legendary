@@ -1,0 +1,97 @@
+Program Xafman;
+Type  Ref=^Node;
+      Node=Record {Звено для построения дерева Хафмена}
+            Lit:char;
+            Number:word;
+            Left, Right:Ref;
+          end;
+     tChast=array[1..256] of Ref; {Массив для построения дерева Хафмена}
+     tStr=string[15];
+     tCode=array[#0..#255] of tStr;
+Var Ch:tChast;
+    Numb:integer;{Количество звеньев в массиве Ch}
+    Elem:ref;
+    Code:tCode;
+
+
+procedure LoadFile(n:string; var Numb:integer; Var Ch:tChast);
+{Загрузка данных из файла с именем N и зазмещение данных в массиве Ch}
+Type mass=array[#0..#255] of word;
+var  f:file of char;
+     m:mass;
+     a:char;
+begin
+   assign(f,n);
+   reset(f);
+   fillchar(m,sizeof(m),0);
+   while not eof(f) do
+     begin
+       read(f,a);inc(m[a])
+     end;
+   close(f);
+   Numb:=0;
+   for a:=#0 to #255 do
+     if m[a]<>0
+     then begin
+            inc(Numb);
+            New(Ch[numb]);
+            Ch[numb]^.Lit:=a;
+            Ch[numb]^.Number:=m[a];
+            Ch[numb]^.Left:=nil;Ch[numb]^.Right:=nil;
+          end;
+end;
+
+Procedure Sort(Var Ch:tChast);{Процедура сортировки массива Ch по убыванию}
+begin                         {значения поля Number}
+end;
+
+procedure CalcCode(Root:ref;s:tStr);
+begin
+  if (Root^.left=nil)and(Root^.Right=nil){Если это "Лист"}
+  then begin
+          {Запомнить его код}
+         Code[Root^.Lit]:=s
+       end
+  else begin
+         if (Root^.left<>nil) {Если есть левое поддерево, то сместиться туда}
+         then CalcCode(Root^.left,s+'0');
+         if (Root^.Right<>nil){Если есть правое поддерево, то сместиться туда}
+         then CalcCode(Root^.Right,s+'1')
+       end
+end;
+
+procedure CreatCoding(Root:Ref; var Code:tCode);{Построить массив кодировок}
+{Root - Корень дерева Хафмена, Code - Массив с кодировкой каждого
+символа с ненулевым количеством вхождения}
+Begin
+  FillChar(Code,SizeOf(Code),0);{Обнулить массив}
+  CalcCode(Root,'');
+end;
+
+procedure CodeFile(Name:string;Const Code:tCode);
+var f:File of char;{Входной файл}
+    h:file of byte;{Выходной файл}
+Begin
+
+end;
+
+Begin
+    LoadFile('a.txt',Numb,Ch);{Ввод данных из файла}
+    {Построение дерева хафмена}
+    While Numb>1 do
+      begin
+         Sort(Ch);{Сортируем массив частот вхлждения символов по убывнию}
+         New(Elem);  {Создаем новое звено}
+         Elem^.Left:=Ch[Numb];   {"Прицепляем" два звена с наименьшим весом}
+         Elem^.Right:=Ch[Numb-1];
+         Dec(Numb);
+         Ch[Numb]:=Elem; {Новое звено размещаем в массиве}
+      end;
+    {Теперь массив Ch[1] содержит дерево Хафмена}
+    {По этому дереву необходимо построить массив кодировки}
+  
+    CreatCoding(ch[1],Code);{Построить массив кодировок}
+
+    {По построенной таблице кодировки необходимо закодировать входной файл}
+    CodeFile(Name,Code);
+end.

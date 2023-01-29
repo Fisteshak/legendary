@@ -1,0 +1,15 @@
+var i,x,p1,p2,p3:longint;
+begin
+  Writeln('Введите целое положительное число:');
+  Readln(x);
+  p1:=1;p2:=1;
+  for i:=3 to x do
+   begin
+     p3:=p1+p2;
+     p1:=p2;
+     p3:=p3;
+   end;
+   if x<3               {*}
+   then writeln(p1)
+   else writeln(p3)
+end.

@@ -1,0 +1,6 @@
+program paynnpese;
+var a: boolean;
+begin
+writeln ('Введите последовательность латинских букв');
+readln (a);
+end.

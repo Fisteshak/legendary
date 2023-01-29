@@ -1,0 +1,42 @@
+program yaotstal;
+Uses graph,crt;
+var gd,gm,xv,yv,dx,p:integer;
+begin
+gd:=VGA;
+GM:=VGAHi;
+InitGraph(gd, gm, 'c:\tools\tp7\bgi');
+xv:=400;
+yv:=100;
+p:=1;
+repeat
+xv:=xv-5;
+setcolor(8);
+setfillstyle(1,8);
+fillellipse (xv*p,yv,50*p,15);
+fillellipse (xv-70*p,yv,20*p,20);
+setcolor(15);
+setfillstyle(1,15);
+fillellipse (xv-80*p,yv-5,5,5);
+setcolor(8);
+setfillstyle (1,8);
+line (xv-15*p,yv,xv*p,yv+50);
+line (xv+15*p,yv,xv*p,yv+50);
+line (xv+15,yv,xv+60,yv-15);
+line (xv+15,yv,xv+60,yv+15);
+line (xv+60,yv+15,xv+60,yv-15);
+floodfill (xv,yv+25,8);
+floodfill (xv+40,yv-2,8);
+delay (32000);
+
+setcolor (0);
+setfillstyle (1,0);
+bar (0,0,600,600);
+if (xv<=-100) or (xv>=800)
+then begin xv:=0;
+p:=-p;
+end;
+
+until keypressed;
+readln;
+Closegraph;
+end.

@@ -1,0 +1,21 @@
+program nechetnoe;
+var m,n,g,x: integer;
+begin
+x:=0;
+writeln ('Введите количество чисел');
+readln (n);
+for g:=1 to n do
+writeln ('Введите число');
+readln (m);
+if m mod 2<>0
+then
+  if m>x
+  then
+  x:=m;
+if x>0
+then
+writeln ('Наибольшее нечетное число -',x,');
+if x=0
+then writeln ('Нечетные числа отсутствовали');
+ end;
+ end.

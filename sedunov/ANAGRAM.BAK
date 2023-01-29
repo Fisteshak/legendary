@@ -1,0 +1,19 @@
+program anagram;
+function anagramm (a,b:string):boolean;
+var i: integer; f:boolean;
+begin
+f:=false;
+if length(a)=length(b)
+then f:=true;
+
+for i:=1 to length (b) do
+if pos (b[i],a)=0
+then f:=false;
+anagramm:=f;
+end;
+var a,b: string;
+begin
+readln (a);
+readln (b);
+write (anagramm(a,b));
+end.

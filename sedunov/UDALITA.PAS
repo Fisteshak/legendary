@@ -1,0 +1,46 @@
+program dalita;
+type ref=^node;
+node=record
+lit:char;
+next:ref;
+end;
+procedure crlist(var inz:ref);
+var tz:ref;
+a:char;
+begin
+new(inz);
+tz:=inz;
+read(a);
+tz^.lit:=a;
+while a<>'.' do begin
+new (tz^.next);
+tz:=tz^.next;
+read(a);
+tz^.lit:=a;
+end;
+tz^.next:=nil;
+readln;
+end;
+procedure viv(inz:ref);
+var tz:ref;
+begin
+tz:=inz;
+while tz<>nil do begin
+write (tz^.lit,' ');
+tz:=tz^.next;
+end;
+writeln;
+end;
+procedure legendarka(tz:ref;p:integer);
+begin if p<>1 then begin
+if tz^.next<>nil
+then begin
+tz^.lit:=p
+tz^.next:=p^.next;
+dispose (p);
+end;
+begin
+crlist
+viv
+legendarka
+end.

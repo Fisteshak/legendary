@@ -1,0 +1,22 @@
+program qq;
+var m: array ['A'..'Z'] of integer;
+s: string;
+i:integer;
+c:char;
+begin
+readln (s);
+for c:='A' to 'Z' do
+begin
+m[c]:=0;
+end;
+for i:=1 to length(s) do
+begin
+c:=s[i];
+end;
+case c of
+'A'..'Z': inc (m[c]);
+'a'..'z': begin c:=UpCase(c);
+inc (m[c]);
+end;
+end;
+end.
